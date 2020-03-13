@@ -1,0 +1,22 @@
+<?
+
+//Put this in the content folder next to the zipped file
+
+//Grab the full server url from the host
+
+//Update the routes and pick either of the extracting methods below
+
+
+//Extract a zipped file
+
+$output = shell_exec('unzip /mnt/stor14-wc1-ord1/946923/980760/www.oxforddrupaltraining.com/web/content/drupal-8.4.0.zip');
+
+//OR
+
+//Extract a tar.gz file
+
+$output = shell_exec('tar -C /mnt/stor14-wc1-ord1/946923/980760/www.oxforddrupaltraining.com/web/content/ -xf /mnt/stor14-wc1-ord1/946923/980760/www.oxforddrupaltraining.com/web/content/drupal-8.4.0.zip');
+
+//Then visit the url of this (usually the url/extract.php) to run the code
+
+?>

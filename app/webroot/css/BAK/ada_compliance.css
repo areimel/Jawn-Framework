@@ -1,0 +1,73 @@
+/********************************************
+
+ADA COMPLIANCE
+
+Author: Alec Reimel
+
+	-This CSS file highlights elements that are missing ADA-focused
+	attributes.  The effects can be removed by fixing the ADA issues, 
+	making this a very useful tool for forcing yourself to do ADA.
+
+	Codepen link: https://codepen.io/areimel/pen/NWKmjgm
+
+********************************************/
+
+html:not([lang]):after{
+  content: 'NO LANG ATTRIBUTE';
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,0,0,.75);
+  color: #fff;
+  font-size: 100px;
+}
+
+html[mobile-thumb-zone="yes"]:after{
+  content: '';
+  background-image: url("/img/boilerplate/mobile-thumb-zones.png");
+  background-size: cover;
+  background-position: center;
+  opacity: .75;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+@media only screen and (max-width : 750px) {
+  html[mobile-thumb-zone="yes"]:after{
+    display: block;
+  }
+}
+
+img:not([alt]) {
+  filter: blur(5px) !important;
+  border: solid 5px #f00 !important;
+}
+input:not([aria-label]) {
+  filter: blur(0px) !important;
+  border: solid 5px #f00 !important;
+}
+textarea:not([aria-label]) {
+  filter: blur(0px) !important;
+  border: solid 5px #f00 !important;
+}
+select:not([aria-label]) {
+  filter: blur(0px) !important;
+  border: solid 5px #f00 !important;
+}
+a:not([aria-label]) {
+  filter: blur(0px) !important;
+  border: solid 5px #f00 !important;
+}

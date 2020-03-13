@@ -1,0 +1,68 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+	
+	# Code for http sites
+	RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+	RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+	
+	# Code for https sites
+	# RewriteCond %{ENV:HTTPS} !on [NC]
+    # RewriteRule ^(.*)$ https://example.com/$1 [R,L]
+
+	RewriteRule ^$ app/webroot/ [L]
+	RewriteRule (.*) app/webroot/$1 [L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+  # Insert filter
+  SetOutputFilter DEFLATE
+
+  # Don't compress images
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+  # Make sure proxies don't deliver the wrong content
+  Header append Vary User-Agent env=!dont-vary
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch ".(js|css|xml|gz|html)$">
+    Header append Vary: Accept-Encoding
+  </FilesMatch>
+</IfModule>
+
+# Rackspace cache clear, remove for live site.
+<IfModule mod_php5.c>
+          <IfModule mod_headers.c>
+               <FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|swf|mpeg|wav|mp3|wma|mpg|css|js)$">
+                   Header set Cache-Control "no-cache"
+               </FilesMatch>
+          </IfModule>
+</IfModule>
+
+
+# Uncomment for launch
+# <IfModule mod_expires.c>
+#   ExpiresActive On
+# 
+#   # Images
+#   ExpiresByType image/jpeg "access plus 1 year"
+#   ExpiresByType image/gif "access plus 1 year"
+#   ExpiresByType image/png "access plus 1 year"
+#   ExpiresByType image/webp "access plus 1 year"
+#   ExpiresByType image/svg+xml "access plus 1 year"
+#   ExpiresByType image/x-icon "access plus 1 year"
+# 
+#   # Video
+#   ExpiresByType video/mp4 "access plus 1 year"
+#   ExpiresByType video/mpeg "access plus 1 year"
+# 
+#   # CSS, JavaScript
+#   ExpiresByType text/css "access plus 1 hour"
+#   ExpiresByType text/javascript "access plus 1 hour"
+#   ExpiresByType application/javascript "access plus 1 hour"
+# 
+#   # Others
+#   ExpiresByType application/pdf "access plus 1 month"
+#   ExpiresByType application/x-shockwave-flash "access plus 1 month"
+# </IfModule>
